@@ -1,0 +1,119 @@
+﻿@page "pages/"
+@model Chat.Pages.IndexModel
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.4/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="~/css/reset.css">
+    <link rel="stylesheet" href="~/css/chat.css">
+    <title>Document</title>
+</head>
+
+<body>
+    <div class="main-container">
+        <div class="sidebar">
+            <div class="list-group list-group-flush">
+                <a href="#" class="list-group-item list-group-item-action" data-peer-id="89349">
+                    <div class="list-group-item-wrapper">
+                        <div>
+                            <div class="img fw-bold fs-5 bg-secondary bg-gradient">
+                                M
+                            </div>
+                        </div>
+                        <div class="p-0 chat-name-small-massage">
+                            <p class="fw-bold username">My Name is Niko</p>
+                            <div class="smoll-massage">
+                                <p class="text-black-50 fs-6 text-truncate">
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Rerum qui voluptates laboriosam fugiat quia illum, eius quos
+                                    maiores dolores ut exercitationem distinctio ratione nostrum quisquam magni nobis
+                                    aliquam quasi beatae.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action" data-peer-id="893dfgdf49">
+                    <div class="list-group-item-wrapper">
+                        <div>
+                            <div class="img fw-bold fs-5 bg-secondary bg-gradient">
+                                M
+                            </div>
+                        </div>
+                        <div class="p-0 chat-name-small-massage">
+                            <p class="fw-bold username">My Name is Niko</p>
+                            <div class="smoll-massage">
+                                <p class="text-black-50 fs-6 text-truncate">
+                                    Lorem ipsum dolor sit amet consectetur
+                                    adipisicing elit. Rerum qui voluptates laboriosam fugiat quia illum, eius quos
+                                    maiores dolores ut exercitationem distinctio ratione nostrum quisquam magni nobis
+                                    aliquam quasi beatae.
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </a>
+            </div>
+        </div>
+        <div class="chat">
+            <div class="navbar">
+                <div class="user-info">
+                    <div>
+                        <div class="arrow">
+                            <div class="arrow-line arrow-straight"></div>
+                        </div>
+                    </div>
+                    <div>
+                        <div class="img fw-bold fs-5 bg-secondary bg-gradient">
+                            M
+                        </div>
+                    </div>
+                    <div class="p-0 name-last-time">
+                        <p class="fw-bold">My Name is Niko</p>
+                        <p class="text-black-50 fs-6">last time</p>
+                    </div>
+                </div>
+            </div>
+            <div class="chat-messages-main">
+                <div class="chat-messages">
+                    <div class="chat-messages-scroll">
+                        <div class="messages-wrapper">
+
+                            <div class="chat-messages-group">
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="message-container">
+                    <div class="text-massage-wrapper">
+
+                        <div class="input-text-massage">
+                            <div contenteditable="true" class="text-massage" autofocus></div>
+                            <span class="message-palceholder">Message</span>
+                        </div>
+                    </div>
+                    <div class="send-message-button">
+                        <svg xmlns="http://www.w3.org/2000/svg" class="bi bi-send-fill icon-send" viewBox="0 0 16 16">
+                            <path d="M15.964.686a.5.5 0 0 0-.65-.65L.767 5.855H.766l-.452.18a.5.5 0 0 0-.082.887l.41.26.001.002 4.995 3.178 3.178 4.995.002.002.26.41a.5.5 0 0 0 .886-.083l6-15Zm-1.833 1.89L6.637 10.07l-.215-.338a.5.5 0 0 0-.154-.154l-.338-.215 7.494-7.494 1.178-.471-.47 1.178Z" />
+                        </svg>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/microsoft-signalr/6.0.1/signalr.js"></script>
+    <script src="~/js/chat.js"></script>
+</body>
+
+</html>

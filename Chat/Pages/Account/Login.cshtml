@@ -1,0 +1,122 @@
+﻿@page
+@using Chat.Infrastructure;
+@using Microsoft.AspNetCore.Authorization;
+@using Microsoft.AspNetCore.Identity;
+@using System.Text.RegularExpressions;
+@model LoginModel
+
+@{ 
+    ViewBag.Title = "Log in";
+}
+
+<div class="vh-100 position-relative" style="background-color: #eee;">
+    <div class="bg-white rounded-3 m-auto p-3 px-4 shadow position-relative bottom-50" style="max-width: 350px; top: calc(50% - 226px);">
+        <div class="text-danger" asp-validation-summary="All"></div>
+
+        <h1 class="mb-4 text-center">Speaker</h1>
+        <p class="mb-3 text-center text-secondary">please confirm your account </p>
+
+        <form method="post">
+
+            <input type="hidden" name="returnUrl" value="@Model.ReturnUrl" />
+
+            <label class="form-label">Email or Username</label>
+            <input asp-for="EmailOrUsername" type="text" class="form-control mb-2">
+
+            <label class="form-label">Password</label>
+            <div class="input-group mb-2">
+                <input asp-for="Password" type="password" class="password form-control">
+                <span class="input-group-text">
+                    <i class="eye bi-eye-slash-fill"></i>
+                </span>
+            </div>
+
+            <div class="d-flex justify-content-center form-check mb-3">
+                <div>
+                    <input asp-for="RememberMe" class="form-check-input" type="checkbox" value="true" checked>
+                    <label class="form-check-label" for="flexCheckDefault">remember me</label>
+                </div>
+            </div>
+
+
+            <input type="submit" class="btn btn-primary w-100 mb-3" value="log in">
+
+            <div style="height: 20px; border-bottom: 1px solid #666;" class="w-100 position-relative mb-3">
+                <span style="padding: 0 10px; position: absolute; top: 5px; color: #666; left: calc(50% - 17.5px);" class="bg-white">
+                    or
+                </span>
+            </div>
+
+            <a asp-page="/Account/Logup" style="text-decoration: none;" class="d-block text-center w-100">Log up</a>
+        </form>
+
+    </div>
+</div>
+<script src="~/js/eyes.js"></script>
+
+@functions {
+
+    public class LoginModel : PageModel
+    {
+        private SignInManager<IdentityUser> signInManager;
+        public UserManager<IdentityUser> UserManager;
+
+        public LoginModel(SignInManager<IdentityUser> signinMgr, UserManager<IdentityUser> userManager)
+        {
+            signInManager = signinMgr;
+            UserManager = userManager;
+        }
+
+        [BindProperty]
+        public string EmailOrUsername { get; set; } = string.Empty;
+
+        [BindProperty]
+        public string Password { get; set; } = string.Empty;
+
+        [BindProperty]
+        public bool RememberMe { get; set; } = false;
+
+        [BindProperty(SupportsGet = true)]
+        public string? ReturnUrl { get; set; }
+
+        public async Task<IActionResult> OnPostAsync()
+        {
+            if (ModelState.IsValid)
+            {
+                Microsoft.AspNetCore.Identity.SignInResult? result = await PasswordSignInAsync();
+
+                if (result == null)
+                {
+                    return Page(); 
+                }
+
+                if (result.Succeeded)
+                {
+                    return Redirect(ReturnUrl ?? "/");
+                }
+
+                ModelState.AddModelError("", "Invalid username or email or password");
+            }
+
+            return Page();
+        }
+
+        private async Task<Microsoft.AspNetCore.Identity.SignInResult?> PasswordSignInAsync()
+        {
+            if (EmailHandler.IsValid(EmailOrUsername))
+            {
+                IdentityUser user = await UserManager.FindByEmailAsync(EmailOrUsername);
+
+                if (user == null)
+                {
+                    ModelState.AddModelError("", "Invalid email");
+                    return null;
+                }
+
+                return await signInManager.PasswordSignInAsync(user, Password, RememberMe, false);
+            }
+
+            return await signInManager.PasswordSignInAsync(EmailOrUsername, Password, RememberMe, false);
+        }
+    }
+}

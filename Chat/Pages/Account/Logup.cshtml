@@ -1,0 +1,47 @@
+﻿@page
+@model Chat.Pages.Account.Logup
+
+@{
+    ViewBag.Title = "Log up";
+}
+
+<div class="py-4 vh-100 position-relative" style="background-color: #eee;">
+
+    <div class="bg-white rounded-3 m-auto p-3 px-4 shadow mt-5 mb-3" style="max-width: 350px;">
+        <div class="text-danger" asp-validation-summary="All"></div>
+        <h1 class="mb-4 text-center">Speaker</h1>
+        <p class="mb-3 text-center text-secondary">Register to start speak</p>
+        
+        <form method="post">
+            <input asp-for="Email" type="email" class="form-control mb-3" placeholder="Email">
+
+            @*<input type="text" class="form-control mb-3" placeholder="Name">*@
+
+            <input asp-for="Username" type="text" class="form-control mb-3" placeholder="Username">
+
+            <div class="input-group mb-3">
+                <input asp-for="Password" type="password" class="password form-control" placeholder="Password">
+                <span class="input-group-text">
+                    <i class="eye bi-eye-slash-fill"></i>
+                </span>
+            </div>
+
+            <div class="input-group mb-4">
+                <input asp-for="ComfirmedPassword" type="password" class="password form-control" placeholder="Confirm password">
+                <span class="input-group-text">
+                    <i class="eye bi-eye-slash-fill"></i>
+                </span>
+            </div>
+
+            <input type="submit" class="btn btn-primary w-100 mb-3" value="log up">
+        </form>
+
+    </div>
+
+    <div class="bg-white rounded-3 m-auto p-3 shadow text-center" style="max-width: 350px;">
+        Do you already have an account?
+        <a asp-page="/Account/Login" style="text-decoration: none;">Log in</a>
+    </div>
+
+</div>
+<script src="~/js/eyes.js"></script>
